@@ -1,5 +1,5 @@
 {
-  "name": "pixchat",
+  "name": "pixchatapp",
   "version": "1.0.0",
   "description": "Social Media app for interaction among users",
   "main": "server.js",
@@ -12,6 +12,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
+    "gravatar": "^1.8.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.13.3",
     "passport": "^0.4.1",
