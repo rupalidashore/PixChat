@@ -37,5 +37,5 @@ app.use('/api/posts',posts);
 
 
 
-const port = 5200; //port number
+const port = 5600; //port number
 app.listen(port,() => console.log(`server is running on port ${port}`));
