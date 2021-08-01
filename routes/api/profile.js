@@ -72,7 +72,7 @@ router.get("/user/:user_id", (req, res) => {
       res.json(profile);
     })
     .catch((err) =>
-      res.status(404).json({ profile: "There is no profile for this user" })
+      res.status(404).json(err)
     );
 });
 
@@ -166,6 +166,10 @@ router.post(
     }
 
     Profile.findOne({ user: req.user.id }).then((profile) => {
+      if (!profile) {
+        errors.noprofile = "There is no profile for this user";
+        return res.status(404).json(errors);
+      }
       const newEdu = {
         school: req.body.school,
         degree: req.body.degree,
@@ -176,7 +180,7 @@ router.post(
         description: req.body.description,
       };
 
-      // Add to exp array
+      // Add to exp array      
       profile.education.unshift(newEdu);
 
       profile.save().then((profile) => res.json(profile));
@@ -219,7 +223,7 @@ router.delete(
 // @access  Private
 router.delete(
   "/",
-  passport.authenticate("jwt", { session: false }),
+   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Profile.findOneAndRemove({ user: req.user.id }).then(() => {
       User.findOneAndRemove({ _id: req.user.id }).then(() =>

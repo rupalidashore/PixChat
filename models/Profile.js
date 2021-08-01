@@ -15,7 +15,7 @@ const profileSchema = new Schema({
  birthDate: {
   type: Date,
   //default:Date.now,
-  required: false,
+  required: true,
 },
 gender: {
   type: String,
