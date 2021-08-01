@@ -187,6 +187,121 @@ router.post(
     });
   }
 );
+//@route  POST  api/profile/user/:user_id/friend
+//@desc   Add user to current user's 'Friend's' list
+//@access Private
+
+router.post(
+  '/user/:user_id/friend', 
+  passport.authenticate('jwt', { session: false }), (req, res) => {
+    const errors = {};
+Profile.findOne({user: req.params.user_id})
+    .then(profile =>{
+   Profile.findOne({user: req.user.id})
+      .then((profile) => {
+        if (!profile)
+        res.status(404).json({ profilenotfound: 'Cannot find your profile' });
+
+        if(profile.friends.filter((friends) => friends.user_id.toString() === req.params.user_id).length > 0)
+        return res.status(400).json({alreadyfriend:'User is already friend of this user'});
+        
+        profile.friends.unshift({user_id: req.params.user_id});
+        profile.save().then((profile) => res.json(profile)); 
+
+      Profile.findOne({user: req.params.user_id})
+        .then(profile =>{
+          profile.friends.unshift({user_id: req.user.id });
+          profile.save().then((profile) => console.log(profile));
+        })
+    })
+      .catch(err => res.status(404).json({profilenotfound: 'Cannot find your profile'}));
+    })
+    .catch(err => console.log(err));
+  }
+)
+
+// @route  DELETE  api/profile/user/:user_id/unfriend
+// @desc   Remove user from current user's 'friends' list
+// @access Private
+router.delete(
+  "/user/:user_id/unfriend",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const errors = {};
+
+    Profile.findOne({ user: req.params.user_id })
+      .then((profile) => {
+        Profile.findOne({ user: req.user.id })
+          .then((profile) => {
+            if (!profile)
+              res
+                .status(404)
+                .json({ profilenotfound: "Cannot find your profile" });
+
+            if (
+              profile.friends.filter(
+                (friends) =>
+                friends.user_id.toString() === req.params.user_id
+              ).length === 0
+            ) {
+              return res.status(400).json({
+                notfriend: "Cannot unfriend user you are not friends with",
+              });
+            }
+
+            const removeIndex = profile.friends
+              .map((item) => item.user_id.toString())
+              .indexOf(req.params.user_id);
+            profile.friends.splice(removeIndex, 1);
+            profile.save()
+            .then((profile) => res.json(profile));
+          })
+          .catch((err) =>
+            res
+              .status(404)
+              .json({ profilenotfound: "Cannot find your profile" })
+          );
+      })
+      .catch((err) => console.log(err));
+
+      Profile.findOne({ user: req.user.id })
+      .then((profile) => {
+        Profile.findOne({ user: req.params.user_id })
+          .then((profile) => {
+            if (!profile)
+              res
+                .status(404)
+                .json({ profilenotfound: "Cannot find this profile" });
+
+            if (
+              profile.friends.filter(
+                (friends) =>
+                friends.user_id.toString() === req.user.id
+              ).length === 0
+            ) {
+              return res.status(400).json({
+                notfriend: "Cannot remove from friends",
+              });
+            }
+
+            const removeIndex = profile.friends
+              .map((item) => item.user_id.toString())
+              .indexOf(req.user.id);
+            profile.friends.splice(removeIndex, 1);
+            profile.save()
+              .then((profile) => res.json(profile))
+              .catch((err) => console.log(err));
+          })
+          .catch((err) =>
+            res
+              .status(404)
+              .json({ profilenotfound: "Cannot find this profile" })
+          );
+      })
+      .catch((err) => console.log(err));
+  }
+);
+  
 
 // @route   DELETE api/profile/education/:edu_id
 // @desc    Delete education from profile
