@@ -9,4 +9,4 @@ Run project on localhost:5200 (use 'npm run server' in terminal before opening l
 
 YouTube link for demonstration: https://youtu.be/FR-FL6EwRHQ
 
-My contributions were in Profile.js 
+
