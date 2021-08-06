@@ -60,8 +60,8 @@ education: [{
   }
 }],
 
-//friend list
-friends: [
+  //friend list
+  friends: [
   {
     user_id: {
       type: String,
