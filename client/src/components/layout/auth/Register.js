@@ -1,25 +1,30 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux';
 import axios from 'axios' ;
 import classnames from 'classnames';
+import {registerUser} from '../../../actions/authActions';
 
 class Register extends Component {
+  // Register is child class, Component is parent client
+  // constructor is 1st phase of lifecycle, you can add customization to component before it is rendered
     constructor(){
-        super();
+        super();  // this.state object is available for every component by default, where you can data for that components lifecycle
         this.state = {
             name: '',
             email: '', 
             password: '',
             password2:'',
-            errors: {}
+            errors: {} // api will return error information
         }
     }
 
-    onChange(e){
+    onChange(e){ // e is the input from the textbox
 
      this.setState({[e.target.name]: e.target.value})
     }
-    onSubmit(e){
-        e.preventDefault();
+    onSubmit(e){ // onSubmit will fire the API call
+      // e is the entire form
+        e.preventDefault(); //prevent automatic refresh of the page
 
       const newUser = {
           name: this.state.name, 
@@ -28,19 +33,19 @@ class Register extends Component {
           password2: this.state.password2
       };
 
-      axios
-        .post('/api/users/register', newUser)
-        .then(res=>console.log(res.data))
-        .catch(err=> this.setState({errors : err.response.data}));
+     // axios
+      //  .post('/api/users/register', newUser)
+     //   .then(res=>console.log(res.data))
+      //  .catch(err=> this.setState({errors : err.response.data}));
 
 
-    
+    this.props.registerUser(newUser)
 
     }
     render() {
 
-      const errors = this.state.errors;
-      //const {errors} = this.state;
+      const errors = this.state.errors; //created a local variable that will access the errors object in state
+      //const {errors} = this.state; // this is a type of deconstruction
         return  (
           <div className="register">
           <div className="container">
@@ -51,17 +56,17 @@ class Register extends Component {
                 <form noValidate onSubmit={this.onSubmit.bind(this)}>
                   <div className="form-group">
                     <input type="text" 
-                    className={classnames('form-control form-control-lg', {'is-invalid': errors.name})} 
+                    className={classnames('form-control form-control-lg', {'is-invalid': errors.name})} //classnames is a library that allows conditional styling
                     placeholder="Name"
-                    name="name" 
+                    name="name" // name of textbox is name because API is expected a key named name
                     value={this.state.name} 
-                    onChange={this.onChange.bind(this)}
+                    onChange={this.onChange.bind(this)} //onChange is event on textbox
                     />
                     {errors.name && (
                     <div className="invalid-feedback">{errors.name}</div>)}
                   </div>
                   <div className="form-group">
-                    <input type="email"
+                    <input type="email" // name of textbox is email because API is expecting a key named email
                     className={classnames('form-control form-control-lg', {'is-invalid': errors.email})}
                      placeholder="Email Address" name="email"
                     value={this.state.email} 
@@ -107,6 +112,6 @@ class Register extends Component {
       
         
     
+// data the component wants to receive from the star and the action it wants to perform
 
-
-export default  Register;
+export default connect(null, {registerUser}) (Register) ;
