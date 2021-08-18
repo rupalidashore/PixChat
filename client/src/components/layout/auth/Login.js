@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 
 class  Login extends Component {
     render() {
@@ -17,7 +18,16 @@ class  Login extends Component {
                 <div className="form-group">
                   <input type="password" className="form-control form-control-lg" placeholder="Password" name="password" />
                 </div>
-                <input type="submit" className="btn btn-info btn-block mt-4" />
+                <input type="submit" className="btn btn-info btn-block mt-4" /> 
+
+                <Link to="/forgotPassword">
+                    <button
+                      type="button"
+                      class="btn btn-default btn-lg btn-block"
+                    >
+                      Forgot Password?
+                    </button>
+                    </Link>
               </form>
             </div>
           </div>

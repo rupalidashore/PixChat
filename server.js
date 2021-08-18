@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
+const nodemailer = require("nodemailer");
 const keys = require ('./config/keys');
 const users = require('./routes/api/users');
 const profile = require('./routes/api/profile');

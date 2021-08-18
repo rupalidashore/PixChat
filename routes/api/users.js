@@ -6,6 +6,7 @@ const passport = require('passport');
 const router = express.Router(); 
 const User = require('../../models/User');
 const keys = require('../../config/keys');
+const nodemailer = require('nodemailer');
 const validateRegisterInput = require('../../validation/registration');
 const validateLoginInput = require('../../validation/login');
 
@@ -120,5 +121,70 @@ router.get(
   (req,res) => {
       res.json(req.user);
   });
+
+  
+// @route   POST /api/users/forgotPassword
+// @desc    Reset user's password
+// @access  Public
+router.post("/forgotPassword", (req, res) => {
+  const email = req.body.email;
+  let newPassword = JSON.stringify(
+    Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000 //temporary random generated password
+  );
+  //Find a user with the email
+  
+  User.findOne({ email:req.body.email })
+    .then((user) => {
+      if (!user) {
+        return res.status(404).json({ email: "Forgot Password: Need email address" });
+      } else {
+        bcrypt.genSalt(10, (err, salt) => {
+          if (err) throw err;
+          bcrypt.hash(newPassword, salt, (err, hash) => {
+            if (err) throw err;
+            newPassword = hash;
+            User.updateOne(
+              { email: email },
+              { $set: { password: newPassword } }
+            ).then((user) => {
+              res.json(user);
+            });
+          });
+        });
+        //var transporter = nodemailer.createTransport(keys.smtp);
+        console.log('Creating transporter using smtp key: ' + keys.smtp);
+        var transporter = nodemailer.createTransport(keys.smtp);
+        console.log("created transporter");
+
+ // setup e-mail data with unicode symbols
+ var mailOptions = {
+  from: req.body.name + req.body.email, // sender address
+  to: email, // list of receivers
+  subject: "Temporary password", // Subject line
+  text: "Temporary Password :" + newPassword,
+};
+console.log("created mail options");
+
+// send mail with defined transport object
+transporter.sendMail(mailOptions, function (error, info) {
+  if (!error) {
+    console.log("Message sent");
+    res.send("Email sent");
+  } else {
+    console.log("Failed, error: " + error.message );
+    res.send("Failed, error : ");
+  }
+  console.log("closing transporter");
+  transporter.close();
+  console.log("Message sent: " + info.response);
+});
+}
+})
+.catch((err) => console.log(err));
+});
+
+      
+
+
 
 module.exports = router;
