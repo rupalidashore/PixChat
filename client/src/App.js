@@ -34,3 +34,4 @@ export default App;
 
 
 //react router dom helps map url to respective page and components to load
+// just a comment
