@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import axios from 'axios' ;
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
 import {registerUser} from '../../../actions/authActions';
+import {withRouter} from 'react-router-dom';
 
 class Register extends Component {
   // Register is child class, Component is parent client
@@ -38,16 +40,30 @@ class Register extends Component {
      //   .then(res=>console.log(res.data))
       //  .catch(err=> this.setState({errors : err.response.data}));
 
-
-    this.props.registerUser(newUser)
+    
+    this.props.registerUser(newUser, this.props.history);
 
     }
+
+   componentWillReceiveProps(nextProps) {
+     if(nextProps.errors){
+       this.setState({errors: nextProps.errors});
+     }
+   }
+
+
+
+
+
     render() {
 
       const errors = this.state.errors; //created a local variable that will access the errors object in state
       //const {errors} = this.state; // this is a type of deconstruction
-        return  (
+        const {user} = this.props.auth;
+      
+      return  (
           <div className="register">
+            {user ? user.name : null}
           <div className="container">
             <div className="row">
               <div className="col-md-8 m-auto">
@@ -110,8 +126,15 @@ class Register extends Component {
         }
       }
       
-        
-    
-// data the component wants to receive from the star and the action it wants to perform
+Register.propTypes = {
+  registereUser : PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+  
+}
 
-export default connect(null, {registerUser}) (Register) ;
+    
+const mapStateToProps = (state)=> ({
+  auth : state.auth, // looking for auth data in redux state
+  errors: state.errors,
+})
+export default connect(mapStateToProps, {registerUser})(withRouter(Register));
