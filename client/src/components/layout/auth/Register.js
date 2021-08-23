@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
-import axios from 'axios' ;
+//import axios from 'axios' ;
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import {registerUser} from '../../../actions/authActions';
@@ -130,11 +130,11 @@ Register.propTypes = {
   registereUser : PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
   
-}
+};
 
     
 const mapStateToProps = (state)=> ({
   auth : state.auth, // looking for auth data in redux state
-  errors: state.errors,
+  errors: state.errors
 })
 export default connect(mapStateToProps, {registerUser})(withRouter(Register));

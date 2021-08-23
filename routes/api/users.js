@@ -151,7 +151,7 @@ router.post("/forgotPassword", (req, res) => {
             });
           });
         });
-        //var transporter = nodemailer.createTransport(keys.smtp);
+        
         console.log('Creating transporter using smtp key: ' + keys.smtp);
         var transporter = nodemailer.createTransport(keys.smtp);
         console.log("created transporter");
