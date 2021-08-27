@@ -13,18 +13,30 @@ import ForgotPassword from './components/layout/auth/ForgotPassword';
 import store from './store';
 import setAuthToken from './utils/setAuthToken';
 import {SET_CURRENT_USER} from './actions/types';
+import { logoutUser } from './actions/authActions';
 
 
 if (localStorage.jwtToken){
-    //set token to auth header
-  setAuthToken(localStorage.jwtToken)
-
+   
   //Decoded token
   const decoded = jwt_decode(localStorage.jwtToken);
-  store.dispatch({
-    type:SET_CURRENT_USER,
-    payload:decoded
-  });
+
+  //check for expired token
+ const currentTime = Date.now() / 1000;
+  if(decoded.exp < currentTime){
+
+    store.dispatch(logoutUser());
+    window.location.href = '/login';
+  } else{
+
+      //set token to auth header
+      setAuthToken(localStorage.jwtToken)
+
+      store.dispatch({
+        type:SET_CURRENT_USER,
+        payload:decoded
+      });
+  }
 }
 
 class App  extends Component {

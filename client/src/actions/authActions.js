@@ -47,3 +47,20 @@ export const loginUser = userData => dispatch =>{
         payload: err.response.data
       }));  
   }
+
+  //Log out
+   // For logout we don't need to pass the data
+  export const logoutUser = () => dispatch =>{
+    // Remove from localstorage
+    localStorage.removeItem('jwtToken')
+
+    //Remove auth header
+    setAuthToken(false);
+
+    //clear out user data from the redux store
+    dispatch({
+      type: SET_CURRENT_USER,
+      payload: {}
+    })
+
+  }

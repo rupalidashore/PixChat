@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 import {loginUser} from '../../../actions/authActions';
+//import TextFieldGroup from '../../common/TextFieldGroup';
 
 class Login extends Component {
   constructor(){
@@ -32,6 +33,13 @@ class Login extends Component {
 
   }
 
+  //component is about to be seen on screen(lifecycle event)
+  componentDidMount(){
+    if(this.props.auth.isAuthenticated){
+      this.props.history.push('/dashboard');
+    }
+  }
+  
   
   componentWillReceiveProps(nextProps){
     if(nextProps.auth.isAuthenticated){
