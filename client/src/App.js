@@ -2,17 +2,13 @@ import React, { Component } from 'react';
 import {BrowserRouter as Router, Route,Switch} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import jwt_decode from 'jwt-decode';
-import './App.css';
-import Footer from './components/layout/Footer';
 import Navbar from './components/layout/Navbar';
 import Landing from './components/layout/Landing';
+import Footer from './components/layout/Footer';
+import './App.css';
 import Register from './components/layout/auth/Register';
 import Login from './components/layout/auth/Login';
-import ForgotPassword from './components/layout/auth/ForgotPassword';
-
 import store from './store';
-import setAuthToken from './utils/setAuthToken';
-import {SET_CURRENT_USER} from './actions/types';
 import { logoutUser } from './actions/authActions';
 import PrivateRoute from "./components/common/PrivateRoute";
 import {SET_USER} from './actions/types';
@@ -24,10 +20,14 @@ import EditProfile from "./components/edit-profile/EditProfile";
 import AddEducation from "./components/add-credentials/AddEducation";
 import Profiles from "./components/profiles/Profiles";
 import Profile from "./components/profile/Profile";
+import Posts from './components/posts/Posts'
+import Post from './components/post/Post'
+
+import setAuthToken from './utils/setAuthToken';
+
 
 
 if (localStorage.jwtToken){
-   
   //Decoded token
   const decoded = jwt_decode(localStorage.jwtToken);
 
@@ -45,14 +45,20 @@ if (localStorage.jwtToken){
       setAuthToken(localStorage.jwtToken)
       //dispatch
       store.dispatch({
-        type:SET_CURRENT_USER,
+        type:SET_USER,
         payload:decoded
       });
   }
+
+  //Set auth header
+  setAuthToken(localStorage.jwtToken);
+  //dispatch
+  store.dispatch({
+    type: SET_USER,
+    payload: decoded,
+  });
 }
-
-class App  extends Component {
-
+class App extends Component {
   render() {
   return (
     <Provider store={store}>
@@ -62,7 +68,6 @@ class App  extends Component {
       <Route exact path="/" component={Landing} />
       <Route exact path="/register" component={Register} />
       <Route exact path="/login" component={Login} />
-      <Route exact path="/forgotPassword" component={ForgotPassword} />
 
       <Route exact path="/profiles" component={Profiles} />
               <Route exact path="/profile/:handle" component={Profile} />
@@ -91,15 +96,18 @@ class App  extends Component {
                   component={AddEducation}
                 />
               </Switch>
+              <Switch>
+                <PrivateRoute exact path="/feed" component={Posts} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/post/:id" component={Post} />
+              </Switch>
       <Footer />
       </div>
       </Router>
       </Provider>
-  );
+    );
+  }
 }
-}
+
 export default App;
-
-
-//react router dom helps map url to respective page and components to load
-// just a comment to check if git is working
