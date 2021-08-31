@@ -1,7 +1,7 @@
 
 //Create your own HTML component in react
 import React from 'react';
-import classnames from 'classname';
+import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 const TextFieldGroup =({
