@@ -42,10 +42,10 @@ render() {
           </Link>
         </li>
         <li className="nav-item  ">
-          <a
-            href=""
-            onClick={this.onLogoutClick.bind(this)}
-            className="nav-link"
+
+          <Link className="nav-link" to = "" onClick ={this.onLogoutClick.bind(this)}
+          
+            
           >
             <img
               className="rounded-circle"
@@ -55,7 +55,7 @@ render() {
               title="You must have a gravatar connected to your email to display an image"
             />
             Logout
-          </a>
+          </Link>
         </li>
       </ul>
     );

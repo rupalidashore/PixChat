@@ -1,59 +1,54 @@
 import React, { Component } from 'react'
-import {connect} from 'react-redux';
-import { Link } from 'react-router-dom';
-
-import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
-import classnames from 'classnames';
+import classnames from "classnames";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import {loginUser} from '../../../actions/authActions';
 import TextFieldGroup from '../../common/TextFieldGroup';
 
 class Login extends Component {
-  constructor(){
+  constructor() {
     super();
+    //Local state
     this.state = {
-      email: '',
-      password: '',
-      errors: {}
-    }
+      email: "",
+      password: "",
+      errors: {},
+    };
+
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onChange(e){
-    this.setState({[e.target.name]: e.target.value})
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
   }
 
-  
-  onSubmit(e){
+  onSubmit(e) {
     e.preventDefault();
-
-    const newUser = {
+    const user = {
       email: this.state.email,
       password: this.state.password,
     };
 
-    this.props.loginUser(newUser);
-
+    this.props.loginUser(user);
   }
-
-  //component is about to be seen on screen(lifecycle event)
   componentDidMount(){
     if(this.props.auth.isAuthenticated){
       this.props.history.push('/dashboard');
     }
   }
-  
-  
-  componentWillReceiveProps(nextProps){
-    if(nextProps.auth.isAuthenticated){
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated){
       this.props.history.push('/dashboard');
-}
-    if (nextProps.errors){
-      this.setState({errors: nextProps.errors});
+    }
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
     }
   }
-  
+
   render() {
-    const {errors} = this.state;
+    const { errors } = this.state;
     return (
       <div className="login">
         <div className="container">
@@ -93,20 +88,18 @@ class Login extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }         
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
-  auth:PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  
-  auth:state.auth,
-  errors: state.errors
+  errors: state.errors,
+  auth: state.auth
+});
 
-})
-
-export default connect(mapStateToProps, {loginUser})(withRouter(Login));
+export default connect(mapStateToProps, { loginUser })(Login);
