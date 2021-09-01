@@ -46,16 +46,12 @@ class CreateProfile extends Component {
     if (nextProps.profile.profile) {
       const profile = nextProps.profile.profile;
 
-      // Bring skills array back to CSV
-      const skillsCSV = profile.skills.join(',');
-
+      
       // If profile field doesnt exist, make empty string
       profile.company = !isEmpty(profile.company) ? profile.company : '';
       profile.website = !isEmpty(profile.website) ? profile.website : '';
       profile.location = !isEmpty(profile.location) ? profile.location : '';
-      profile.githubusername = !isEmpty(profile.githubusername)
-        ? profile.githubusername
-        : '';
+      
       profile.bio = !isEmpty(profile.bio) ? profile.bio : '';
       profile.social = !isEmpty(profile.social) ? profile.social : {};
       profile.twitter = !isEmpty(profile.social.twitter)
@@ -81,9 +77,8 @@ class CreateProfile extends Component {
         website: profile.website,
         location: profile.location,
         status: profile.status,
-        skills: skillsCSV,
-        githubusername: profile.githubusername,
         bio: profile.bio,
+        
         twitter: profile.twitter,
         facebook: profile.facebook,
         linkedin: profile.linkedin,
