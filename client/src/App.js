@@ -8,6 +8,8 @@ import Footer from './components/layout/Footer';
 import './App.css';
 import Register from './components/layout/auth/Register';
 import Login from './components/layout/auth/Login';
+import ChangePassword from './components/changePassword/ChangePassword';
+import ForgotPassword from './components/layout/auth/ForgotPassword';
 import store from './store';
 import { logoutUser } from './actions/authActions';
 import PrivateRoute from "./components/common/PrivateRoute";
@@ -16,7 +18,7 @@ import { clearCurrentProfile } from "./actions/profileActions";
 import Dashboard from "./components/dashboard/Dashboard";
 import CreateProfile from "./components/create-profile/CreateProfile";
 import EditProfile from "./components/edit-profile/EditProfile";
-
+import Settings from './components/settings/Settings';
 import AddEducation from "./components/add-credentials/AddEducation";
 import Profiles from "./components/profiles/Profiles";
 import Profile from "./components/profile/Profile";
@@ -68,7 +70,7 @@ class App extends Component {
       <Route exact path="/" component={Landing} />
       <Route exact path="/register" component={Register} />
       <Route exact path="/login" component={Login} />
-
+      <Route exact path="/forgotPassword" component={ForgotPassword} />
       <Route exact path="/profiles" component={Profiles} />
               <Route exact path="/profile/:handle" component={Profile} />
               <Switch>
@@ -102,6 +104,18 @@ class App extends Component {
               <Switch>
                 <PrivateRoute exact path="/post/:id" component={Post} />
               </Switch>
+
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/changePassword"
+                  component={ChangePassword}
+                />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path='/settings' component={Settings} />
+              </Switch>
+             
       <Footer />
       </div>
       </Router>

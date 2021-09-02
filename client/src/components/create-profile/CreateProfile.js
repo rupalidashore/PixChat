@@ -15,7 +15,7 @@ class CreateProfile extends Component {
     this.state = {
       displaySocialInputs: false,
       handle: '',
-      //birthDate:'',
+      birthDate:Date,
       genger:'',
       company: '',
       website: '',
@@ -46,8 +46,8 @@ class CreateProfile extends Component {
 
     const profileData = {
       handle: this.state.handle,
-      //birthDate:this.state.birthDate,
-      //gender:this.state.gender,
+      birthDate:this.state.birthDate,
+      gender:this.state.gender,
       company: this.state.company,
       website: this.state.website,
       location: this.state.location,
@@ -137,6 +137,12 @@ class CreateProfile extends Component {
       { label: 'Intern', value: 'Intern' },
       { label: 'Other', value: 'Other' }
     ];
+    //selection option for gender
+    const optionsOne=[
+      {label:'F', value:'Female'},
+      {label:'M', value:'Male'},
+      {label:'Other',value:'Other'}
+    ];
 
     return (
       <div className="create-profile">
@@ -157,9 +163,23 @@ class CreateProfile extends Component {
                   error={errors.handle}
                   info="A unique handle for your profile URL. Your full name, company name, nickname"
                 />
-
-
-
+                <SelectListGroup
+                  placeholder="Gender"
+                  name="gender"
+                  value={this.state.gender}
+                  onChange={this.onChange}
+                  options={optionsOne}
+                  error={errors.status}
+                  info=" Please select gender"
+                />
+                                  <TextFieldGroup type="date"                          name="birthDate" 
+                                    placeholder="Enter Your Birthdate"
+                                    value={this.state.birthDate}
+                                    onChange={this.onChange}
+                                    error={errors.birthDate}
+                                    info="Pleace select your birthdate"
+                                   />  
+                        
                 <SelectListGroup
                   placeholder="Status"
                   name="status"

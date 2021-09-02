@@ -36,6 +36,17 @@ render() {
             Post Feed
           </Link>
         </li>
+        <li className='nav-item nav'>
+                <Link
+                  className='nav-link d-md-block '          
+                  to='/settings'
+                  id='nav-link'
+                  data-toggle="tooltip"
+                  title="Account Settings"
+                >
+                  <i className='fa fa-cog'></i>
+                </Link>
+              </li>
         <li className="nav-item">
           <Link className="nav-link " to="/dashboard">
             Dashboard

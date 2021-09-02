@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 const TextFieldGroup =({
   name,
   placeholder,
-  value,
+   value,
   label,
   error,
   info,

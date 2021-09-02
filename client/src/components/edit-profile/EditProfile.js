@@ -15,13 +15,14 @@ class CreateProfile extends Component {
     this.state = {
       displaySocialInputs: false,
       handle: '',
+      birthDate:Date,
+      gender:'',
       company: '',
       website: '',
       location: '',
       status: '',
-      skills: '',
-      githubusername: '',
       bio: '',
+
       twitter: '',
       facebook: '',
       linkedin: '',
@@ -73,6 +74,8 @@ class CreateProfile extends Component {
       // Set component fields state
       this.setState({
         handle: profile.handle,
+        birthDate:Date,
+        gender:profile.gender,
         company: profile.company,
         website: profile.website,
         location: profile.location,
@@ -93,6 +96,8 @@ class CreateProfile extends Component {
 
     const profileData = {
       handle: this.state.handle,
+      birthDate:this.state.birthDate,
+      gender:this.state.gender,
       company: this.state.company,
       website: this.state.website,
       location: this.state.location,
@@ -182,6 +187,13 @@ class CreateProfile extends Component {
       { label: 'Other', value: 'Other' }
     ];
 
+     //selection option for gender
+     const optionsOne=[
+      {label:'F', value:'Female'},
+      {label:'M', value:'Male'},
+      {label:'Other',value:'Other'}
+    ];
+
     return (
       <div className="create-profile">
         <div className="container">
@@ -200,6 +212,23 @@ class CreateProfile extends Component {
                   onChange={this.onChange}
                   error={errors.handle}
                   info="A unique handle for your profile URL. Your full name, company name, nickname"
+                />
+                 <TextFieldGroup type="date"                                   
+                                    name="birthDate" 
+                                    placeholder="Enter Your Birthdate"
+                                    value={this.state.birthDate}
+                                    onChange={this.onChange}
+                                    error={errors.birthDate}
+                                    info="Pleace select your birthdate"
+                                   />  
+                <SelectListGroup
+                  placeholder="Gender"
+                  name="gender"
+                  value={this.state.gender}
+                  onChange={this.onChange}
+                  options={optionsOne}
+                  error={errors.status}
+                  info="Please select gender"
                 />
                 <SelectListGroup
                   placeholder="Status"

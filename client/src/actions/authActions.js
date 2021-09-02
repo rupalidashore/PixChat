@@ -1,7 +1,7 @@
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import {GET_ERRORS, SET_CURRENT_USER} from './types';
-//import { authenticate } from 'passport';
+import { authenticate } from 'passport';
 import setAuthToken from '../utils/setAuthToken';
 
 
@@ -64,3 +64,23 @@ export const loginUser = userData => dispatch =>{
     })
 
   }
+    //change password
+  export const changePassword = (userData, history) => (dispatch) => {
+    axios
+      .post("/api/users/changePassword", userData)
+      .then((res) => {
+       
+        //Remove token from ls
+        localStorage.removeItem("jwtToken");
+        //Remove token from axios header
+        setAuthToken(false);
+        //Reset user in the redux store
+         history.push("/login");
+        dispatch({
+          type: SET_CURRENT_USER,
+          payload: {},
+        });
+      })
+      .catch();
+     
+  };

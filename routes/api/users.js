@@ -183,6 +183,52 @@ transporter.sendMail(mailOptions, function (error, info) {
 .catch((err) => console.log(err));
 });
 
+//@route   POST /api/users/changePassword
+//@desc    change user's password
+//@access  Private
+router.post(
+  "/changePassword",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const email = req.body.email;
+    const oldPassword = req.body.oldPassword;
+    let newPassword = req.body.newPassword;
+
+    User.findOne({ email })
+      .then((user) => {
+        if (!user) {
+          return res.status(404).json({ email: "User not found" });
+        }
+        // Check password
+        var ID = user.id;
+        bcrypt
+          .compare(oldPassword, user.password)
+          .then((isMatch) => {
+            if (isMatch) {
+              //User matched
+              bcrypt.genSalt(10, (err, salt) => {
+                if (err) throw err;
+                bcrypt.hash(newPassword, salt, (err, hash) => {
+                  if (err) throw err;
+                  newPassword = hash;
+                  User.updateOne(
+                    { _id: ID },
+                    { $set: { password: newPassword } }
+                  ).then((user) => {
+                    res.json(user);
+                  });
+                });
+              });
+            } else {
+              console.log("couldn't change password");
+            }
+          })
+          .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
+  }
+);
+
       
 
 
