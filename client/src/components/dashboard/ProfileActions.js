@@ -12,6 +12,7 @@ const ProfileActions = () => {
         <i className="fas fa-graduation-cap text-info mr-1" />
         Add Education
       </Link>
+      
     </div>
   );
 };

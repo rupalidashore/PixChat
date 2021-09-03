@@ -6,7 +6,7 @@ import {
   PROFILE_LOADING,
   CLEAR_CURRENT_PROFILE,
   GET_ERRORS,
-  SET_CURRENT_USER
+  SET_CURRENT_USER,
 } from './types';
 
 // Get current profile
@@ -131,7 +131,23 @@ export const deleteAccount = () => dispatch => {
   }
 };
 
-
+// add friend on profile
+export const addFriend = id => dispatch => {
+  axios
+    .post(`/api/profile/user/${id}/friend`)
+    .then(res =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
 
 // Profile loading
 export const setProfileLoading = () => {
