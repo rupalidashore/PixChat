@@ -76,7 +76,7 @@ class Login extends Component {
                   onChange= {this.onChange.bind(this)}
                   error = {errors.password}
                   />
-              <input type="submit" className="btn btn-info btn-block mt-4" />
+              <input type="submit" className="btn appButtons btn-block mt-4" />
               <Link to="/forgotPassword">
                     <button
                       type="button"

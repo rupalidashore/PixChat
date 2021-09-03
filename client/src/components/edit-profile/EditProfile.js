@@ -52,8 +52,9 @@ class CreateProfile extends Component {
       profile.company = !isEmpty(profile.company) ? profile.company : '';
       profile.website = !isEmpty(profile.website) ? profile.website : '';
       profile.location = !isEmpty(profile.location) ? profile.location : '';
-      
       profile.bio = !isEmpty(profile.bio) ? profile.bio : '';
+
+
       profile.social = !isEmpty(profile.social) ? profile.social : {};
       profile.twitter = !isEmpty(profile.social.twitter)
         ? profile.social.twitter
@@ -214,12 +215,12 @@ class CreateProfile extends Component {
                   info="A unique handle for your profile URL. Your full name, company name, nickname"
                 />
                  <TextFieldGroup type="date"                                   
-                                    name="birthDate" 
-                                    placeholder="Enter Your Birthdate"
-                                    value={this.state.birthDate}
-                                    onChange={this.onChange}
-                                    error={errors.birthDate}
-                                    info="Pleace select your birthdate"
+                name="birthDate" 
+                placeholder="Enter Your Birthdate"
+                value={this.state.birthDate}
+                onChange={this.onChange}
+                error={errors.birthDate}
+                info="Pleace select your birthdate"
                                    />  
                 <SelectListGroup
                   placeholder="Gender"
@@ -292,7 +293,7 @@ class CreateProfile extends Component {
                 <input
                   type="submit"
                   value="Submit"
-                  className="btn btn-info btn-block mt-4"
+                  className="btn appButtons btn-block mt-4"
                 />
               </form>
             </div>

@@ -36,7 +36,7 @@ class ProfileCreds extends Component {
     return (
       
         <div className="col-md-6">
-          <h3 className="text-center text-info">Education</h3>
+          <h3 className="educationText text-center">Education</h3>
           {eduItems.length > 0 ? (
             <ul className="list-group">{eduItems}</ul>
           ) : (

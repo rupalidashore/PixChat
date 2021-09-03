@@ -14,7 +14,7 @@ import store from './store';
 import { logoutUser } from './actions/authActions';
 import PrivateRoute from "./components/common/PrivateRoute";
 import {SET_USER} from './actions/types';
-import { clearCurrentProfile } from "./actions/profileActions";
+//import { clearCurrentProfile } from "./actions/profileActions";
 import Dashboard from "./components/dashboard/Dashboard";
 import CreateProfile from "./components/create-profile/CreateProfile";
 import EditProfile from "./components/edit-profile/EditProfile";

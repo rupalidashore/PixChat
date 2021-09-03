@@ -59,3 +59,39 @@ img {
 .card{
   background-color:#D0DBEF;
 }
+
+.bannerCard{
+  background-color: #c997bc;
+}
+
+.bioText{
+  color:#3E4AB8;
+}
+
+.educationText{
+  color:#3E4AB8;
+}
+
+.viewProfileButton{
+  background-color:#c26eac
+}
+.navbar-toggler{
+  background-color: rgb(214, 200, 214);
+}
+
+.appButtons{
+  background-color:#c26eac
+
+}
+
+.iconColor{
+  color:#c26eac;
+  font-weight: 600;
+
+}
+
+.anchorTagText{
+  color:#c26eac !important;
+  font-weight: 600;
+}
+

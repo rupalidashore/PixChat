@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import { deletePost, addLike, removeLike } from '../../actions/postActions';
-
+//import {ProfileItem} from '../profiles/ProfileItem';
 class PostItem extends Component {
   onDeleteClick(id) {
     this.props.deletePost(id);
@@ -67,7 +67,7 @@ class PostItem extends Component {
                 >
                   <i className="text-secondary fas fa-thumbs-down" />
                 </button>
-                <Link to={`/post/${post._id}`} className="btn btn-info mr-1">
+                <Link to={`/post/${post._id}`} className="btn appButtons text-white mr-1">
                   Comments
                 </Link>
                 {post.user === auth.user.id ? (

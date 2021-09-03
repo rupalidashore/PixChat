@@ -21,21 +21,38 @@ render() {
     const guestLinks = (
     <ul className="navbar-nav ml-auto">
         <li className="nav-item">
-          <Link className="nav-link" to="/register">Sign Up</Link>
+          <Link className="nav-link anchorTagText" to="/register">Sign Up</Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/login">Login</Link>
+          <Link className="nav-link anchorTagText" to="/login">Login</Link>
         </li>
     </ul>
     );
       // When logged in then shows this html(dashboard,post feed,log out with the image of an avator)
     const authLinks = (
-      <ul className="navbar-nav ml-auto">
+      <ul className="navbar-item nav">
         <li className="nav-item">
-          <Link className="nav-link" to="/feed">
-            Post Feed
+          <Link className="nav-link" 
+                    to="/feed"
+                    id='nav-link'
+                  data-toggle="tooltip"
+                  title="Post Feed"
+                >
+                  <i className='fas iconColor fa-home'></i>
           </Link>
         </li>
+
+        <li className='nav-item nav'>
+                <Link
+                  className='nav-link d-md-block '
+                  to='/profiles'
+                  id='nav-link'
+                  data-toggle="tooltip"
+                  title="All Profiles"
+                >
+                  <i className="fas iconColor fa-users"></i>
+                </Link>
+              </li>
         <li className='nav-item nav'>
                 <Link
                   className='nav-link d-md-block '          
@@ -44,17 +61,17 @@ render() {
                   data-toggle="tooltip"
                   title="Account Settings"
                 >
-                  <i className='fa fa-cog'></i>
+                  <i className='fa iconColor fa-cog'></i>
                 </Link>
               </li>
         <li className="nav-item">
-          <Link className="nav-link " to="/dashboard">
-            Dashboard
+          <Link className="nav-link iconColor" to="/dashboard">
+            View Profile
           </Link>
         </li>
         <li className="nav-item  ">
 
-          <Link className="nav-link" to = "" onClick ={this.onLogoutClick.bind(this)}
+          <Link className="nav-link iconColor" to = "" onClick ={this.onLogoutClick.bind(this)}
           
             
           >
@@ -72,7 +89,7 @@ render() {
     );
    
     return (
-     <nav className="navbar navbar-expand-sm mb-4">
+     <nav className="navbar navbar-expand-sm navbar-dark  mb-4">
     <div className="container">
       {/* <a className="navbar-brand" href="landing.html">pixchatapp</a> */}
       <Link  className="navbar-brand" to="/">
@@ -83,12 +100,7 @@ render() {
       </button>
 
       <div className="collapse navbar-collapse" id="mobile-nav">
-        <ul className="navbar-nav mr-auto">
-          <li className="nav-item">
-          <Link className="nav-link" to="/profiles"> Pixchat-users
-                </Link>
-          </li>
-        </ul>
+        
         
        {isAuthenticated ? authLinks : guestLinks}  
       

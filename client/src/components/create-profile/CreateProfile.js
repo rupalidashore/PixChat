@@ -172,7 +172,10 @@ class CreateProfile extends Component {
                   error={errors.status}
                   info=" Please select gender"
                 />
-                                  <TextFieldGroup type="date"                          name="birthDate" 
+                                  <TextFieldGroup 
+                                  
+                                    type="date"
+                                    name="birthDate" 
                                     placeholder="Enter Your Birthdate"
                                     value={this.state.birthDate}
                                     onChange={this.onChange}

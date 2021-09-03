@@ -12,15 +12,15 @@ const profileSchema = new Schema({
     require:true,
     max:40
  },
- //birthDate: {
-  //type: Date,
-  //default:Date.now,
-  //required: true,
-//},
-//gender: {
-  //type: String,
-  //required: true
-//},
+ birthDate: {
+  type: Date,
+  default:Date.now,
+  required: true,
+},
+gender: {
+  type: String,
+  required: false
+},
   company: {
     type: String
   },
@@ -30,6 +30,12 @@ const profileSchema = new Schema({
   location: {
   type: String
 },
+status:{
+  type: String,
+  required: false
+},
+
+
 bio: {
   type: String
 },
