@@ -90,6 +90,10 @@ class App extends Component {
                     component={EditProfile}
                   />
                 </Switch>
+                {/* <Switch>
+                <PrivateRoute exact path="/profile" component={Profile} />
+
+              </Switch>  */}
               
               <Switch>
                 <PrivateRoute
