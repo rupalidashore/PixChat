@@ -15,20 +15,20 @@ class settings extends Component {
               <hr />
               <div className="btn-group mb-4" role="group">
                 <Link to="/changePassword" className="btn btn-light">
-                  <i className="fas fa-user-circle text-info mr-1 dashboard-icon" />{" "}
+                  <i className="fas fa-user-circle iconColor mr-1 dashboard-icon" />{" "}
                   Change password!&nbsp;&nbsp;&nbsp;
                 </Link>
               </div>
              
               <div className="btn-group mb-4" role="group">
                 <Link to="/edit-profile" className="btn btn-light">
-                  <i className="fas fa-user-circle text-info mr-1 dashboard-icon" />{" "}
+                  <i className="fas fa-user-circle iconColor mr-1 dashboard-icon" />{" "}
                   Edit profile!&nbsp;&nbsp;&nbsp;
                 </Link>
               </div>
               <div className="btn-group mb-4" role="group">
                 <Link to="/dashboard" className="btn btn-light">
-                  <i className="fas fa-user-circle text-info mr-1 dashboard-icon" />{" "}
+                  <i className="fas fa-user-circle iconColor mr-1 dashboard-icon" />{" "}
                   Delete account!&nbsp;&nbsp;&nbsp;
                 </Link>
               </div>
