@@ -29,14 +29,20 @@ require('./config/passport')(passport);
 
 // write our first route
 
-app.get('/', (req,res) =>res.send('Hello pixchat test1'));
 
 //use routes(path of url)
 app.use('/api/users',users);
 app.use('/api/profile',profile);
 app.use('/api/posts',posts);
 
+if(process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'));
+    app.get ('*', (req,res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    }
+    
+    )
+}
 
-
-const port = 5200; //port number
+const port = process.env.PORT  || 5200;
 app.listen(port,() => console.log(`server is running on port ${port}`));
