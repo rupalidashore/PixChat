@@ -16,3 +16,6 @@ Deployed via Heroku at https://blooming-shore-36615.herokuapp.com/
 PixchatApp is a social media web app. Built by Rupali Dashore and Amandeep Kaur.
 
 We built all aspects of this application, from the databases to the APIs. Features include responsive design, user profiles, Image upload from Gravatar website, JWTToken authentication, password encryption, , like/comment/post functionality. Data is passed between components using Redux store.
+
+![image](https://user-images.githubusercontent.com/81551042/132115569-b9f71ee2-6868-4c74-a784-006eda8162e9.png)
+
