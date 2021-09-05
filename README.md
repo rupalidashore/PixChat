@@ -7,6 +7,8 @@ secretOrKey
 
 Run project on localhost:5200 (use 'npm run server' in terminal before opening localhost) 
 
-YouTube link for demonstration: https://youtu.be/FR-FL6EwRHQ
+YouTube link for demonstration : https://youtu.be/FR-FL6EwRHQ (server sideA)
+YouTube link for demonstration :https://www.youtube.com/watch?v=g_OKNUaNNd8&ab_channel=AmanKaur (Client side)
+
 
 
